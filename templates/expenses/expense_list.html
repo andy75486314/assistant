@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1><i class="fas fa-expendse-check"></i> 我的帳本：</h1>
+  <table class="table table-sm">
+    <tr>
+      <td>時間</td>
+      <td>項目</td>
+      <td>類別</td>
+      <td>金額</td>
+      <td>功能</td>
+    </tr>
+    {% for expendse in expendse_list %}
+    <tr>
+      <td>({{expendse.time| date:"l"}}){{expendse.time}}</td>
+      <td><a href="expendse/{{expendse.id}}/update/">{{expendse.item}}</a></td>
+      <td>{{expendse.get_kind_display}}</td>
+      <td>{{expendse.price}}</td>
+      <td><a href="expendse/{{expendse.id}}/delete/" class="btn btn-sm btn-danger py-0 px-1"><i class="fas fa-trash-alt"></i> 刪除</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% load pagination %}
+  {% get_pagination %}
+{% endblock %}
